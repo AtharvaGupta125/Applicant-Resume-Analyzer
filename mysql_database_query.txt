@@ -1,0 +1,17 @@
+CREATE DATABASE resume_db;
+USE resume_db;
+
+CREATE TABLE resumes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    resume_name VARCHAR(255),
+    resume_text LONGTEXT,
+    email VARCHAR(255),
+    mobile VARCHAR(20),
+    skills TEXT,
+    tenth_percentage FLOAT,
+    twelfth_percentage FLOAT,
+    job_role VARCHAR(100),
+    experience FLOAT,
+    score FLOAT,
+    uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
