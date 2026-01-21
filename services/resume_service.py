@@ -3,17 +3,17 @@ import pdfplumber
 import spacy
 import fasttext
 from spacy.matcher import PhraseMatcher
-from skills_list import skills_list   # ✅ IMPORTANT
+from skills_list import skills_list  
 
 # -----------------------------
 # LOAD MODELS
 # -----------------------------
 nlp = spacy.load("en_core_web_sm")
-model = fasttext.load_model("models/resume_fasttext_model.bin")
+model = fasttext.load_model("ml_models/resume_fasttext_model.bin")
 
 matcher = PhraseMatcher(nlp.vocab, attr="LOWER")
 
-patterns = [nlp(skill) for skill in skills_list]
+patterns = list(nlp.pipe(skills_list))
 matcher.add("SKILLS", patterns)
 
 # -----------------------------
