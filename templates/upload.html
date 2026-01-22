@@ -4,100 +4,89 @@
 <meta charset="UTF-8">
 <title>Resume Upload</title>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-
-    .box {
-        background: white;
-        padding: 25px 30px;
-        width: 360px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-        text-align: center;
-        margin-bottom: 8px;
-    }
-
-    .note {
-        text-align: center;
-        font-size: 13px;
-        color: #555;
-        margin-bottom: 20px;
-    }
-
-    .upload-box {
-        border: 2px dashed #999;
-        padding: 20px;
-        text-align: center;
-        margin-bottom: 15px;
-        background-color: #fafafa;
-    }
-
-    input[type="file"] {
-        margin-top: 10px;
-    }
-
-    label {
-        font-size: 14px;
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    input[type="number"] {
-        width: 100%;
-        padding: 7px;
-        margin-bottom: 15px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-    }
-
-    button {
-        width: 100%;
-        padding: 9px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 15px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
 </head>
 
 <body>
 
-<div class="box">
-    <h2>Resume Upload</h2>
-    <div class="note">
-        PDF name should be <b>Applicant Name</b>
-    </div>
+<div class="page-container">
 
-    <form action="/submit" method="post" enctype="multipart/form-data">
+    <!-- LEFT SIDE : UPLOAD SECTION (UNCHANGED) -->
+    <div class="box">
+        <h2>Resume Upload</h2>
 
-        <div class="upload-box">
-            <b>Upload your file here</b><br><br>
-            <input type="file" name="resume" accept=".pdf" required>
+        {% if message %}
+        <div class="alert {{ msg_type }}">
+            <p>{{ message }}</p>
+
+            {% if info_message %}
+            <p>{{ info_message }}</p>
+            {% endif %}
+
+            {% if job_role %}
+            <p><b>Job Role:</b> {{ job_role }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="note">
+            PDF name should be <b>Applicant Name</b>
         </div>
 
-        <label>Experience (Years)</label>
-        <input type="number" step="0.5" name="experience" required>
+        <form action="/submit" method="post" enctype="multipart/form-data">
 
-        <button type="submit">Upload</button>
-    </form>
+            <div class="upload-box">
+                <b>Upload your file here</b><br><br>
+                <input type="file" name="resume" accept=".pdf" required>
+            </div>
+
+            <label>Experience (Years)</label>
+            <input type="number" step="0.5" name="experience" required>
+
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <!-- RIGHT SIDE : APP DETAILS -->
+    <div class="app-info">
+        <h1>Applicant Resume Analyzer (ARA)</h1>
+
+        <p>
+            This application analyzes resumes using NLP
+            to identify suitable job roles and profile strength.
+        </p>
+
+        <h3>What we do</h3>
+        <ul>
+            <li>Resume parsing & validation</li>
+            <li>Job role identification</li>
+            <li>Experience analysis</li>
+            <li>Resume scoring</li>
+        </ul>
+
+        <h3>How it works</h3>
+        <ol>
+            <li>Upload your resume</li>
+            <li>Enter experience</li>
+            <li>ARA processes your profile</li>
+            <li>Email notification sent</li>
+        </ol>
+
+        <h3>Things to keep in mind while uploading</h3>
+        <ul>
+            <li>Upload your resume in PDF format only</li>
+            <li>Ensure the resume file name is Your Full Name</li>
+            <li>Use a clear and simple resume format</li>
+            <li>Mention skills and experience clearly</li>
+            <li>Avoid images, tables, or heavy graphics</li>
+            <li>Ensure contact details (email & phone) are present</li>
+        </ul>
+
+        <p class="info-note">
+            Your resume data is secure, confidential, and used only for analysis purposes.
+        </p>
+    </div>
+
 </div>
 
 </body>

@@ -1,0 +1,29 @@
+<table>
+    <tr>
+        <th>Resume</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Skills</th>
+        <th>10th %</th>
+        <th>12th %</th>
+        <th>Job Role</th>
+        <th>Experience</th>
+        <th>Score</th>
+        <th>Uploaded At</th>
+    </tr>
+
+    {% for r in rows %}
+    <tr>
+        <td>{{ r[0] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ r[4] }}</td>
+        <td>{{ r[5] }}</td>
+        <td>{{ r[6] }}</td>
+        <td>{{ r[7] }}</td>
+        <td class="score">{{ r[8] }}</td>
+        <td>{{ r[9] }}</td>
+    </tr>
+    {% endfor %}
+</table>
